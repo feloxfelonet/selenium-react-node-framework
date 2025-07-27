@@ -1,0 +1,68 @@
+Test Plan: API Automation for Node.js Backend
+
+1. Objective
+This test plan outlines the approach to automate API testing for a simple Node.js backend application with the following endpoints:
+
+- POST /login
+- GET /items
+- POST /items
+- PUT /items/:id
+- DELETE /items/:id
+
+The goal is to validate that the backend APIs behave correctly under positive and negative conditions, ensuring data integrity and expected HTTP responses.
+
+2. Scope of Testing
+
+✅ What is Being Tested:
+- Authentication functionality via /login
+- CRUD operations on items via /items
+- Server response codes, response body structure, and data consistency
+
+❌ Out of Scope:
+- Frontend (UI) validation
+- Performance, load, or security testing
+
+3. Test Coverage Areas
+
+| Endpoint         | Test Scenarios                            | Positive | Negative |
+|------------------|-------------------------------------------|----------|----------|
+| POST /login      | Valid credentials, invalid credentials    | ✅        | ✅        |
+| GET /items       | Retrieve all items                        | ✅        | ✅ (invalid path) |
+| POST /items      | Create new item with valid data           | ✅        | ✅ (missing fields) |
+| PUT /items/:id   | Update existing item                      | ✅        | ✅ (invalid ID) |
+| DELETE /items/:id| Delete existing item                      | ✅        | ✅ (non-existent ID) |
+
+4. Tools and Technology
+
+Tool        | Purpose                         | Reason for Selection
+------------|----------------------------------|----------------------
+pytest      | Test runner for Python           | Lightweight, readable syntax
+requests    | HTTP client for API interaction  | Easy to use and well-documented
+Python 3    | Scripting language for test logic| Widely used in automation
+
+5. Test Environment Setup
+
+- API Base URL: http://localhost:5000
+- Authentication: Simple static credentials
+- Dependencies:
+  - Python 3.x
+  - requests
+  - pytest
+
+6. How to Run the Tests
+
+1. Install Dependencies  
+   pip install -r requirements.txt
+
+2. Run Tests  
+   pytest tests/
+
+3. View Results  
+   Terminal output will show passed/failed tests.
+
+7. Assumptions and Limitations
+
+- The backend service must be running locally on port 5000.
+- Item IDs are assumed to be returned in the response to support update/delete tests.
+- No database reset is implemented between test runs (could affect repeatability).
+- Authentication is assumed to return a session cookie or simple success flag.
